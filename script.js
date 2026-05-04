@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+  
 let systemData, raceData;
 
 // =====================
@@ -215,3 +217,5 @@ async function run(){
 
   addLog(`最終順位：${rank}位`);
 }
+
+});
