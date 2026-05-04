@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>レース抽選ツール</title>
-  <style>
-    body { font-family: sans-serif; background:#111; color:#eee; padding:20px; }
-    input, select, button { margin:5px; padding:5px; }
-    .box { margin-bottom:20px; }
-    .log { background:#222; padding:10px; height:200px; overflow:auto; }
-  </style>
+<meta charset="UTF-8">
+<title>レース抽選ツール</title>
+<style>
+body { font-family:sans-serif; background:#111; color:#eee; padding:20px; }
+input, select, button { margin:5px; padding:5px; }
+.box { margin-bottom:15px; }
+.log { background:#222; padding:10px; height:220px; overflow:auto; }
+</style>
 </head>
 <body>
 
 <h1>レース抽選ツール</h1>
 
 <div class="box">
+  <label>レース：</label>
+  <select id="raceSelect"></select>
+
   <label>人数：</label>
   <select id="players"></select>
 
@@ -27,19 +30,18 @@
 </div>
 
 <div class="box">
-  <h3>ステータス</h3>
-  <input id="スピード" placeholder="スピード">
-  <input id="スタミナ" placeholder="スタミナ">
-  <input id="パワー" placeholder="パワー">
-  <input id="根性" placeholder="根性">
-  <input id="賢さ" placeholder="賢さ">
+<h3>プレイヤーステータス</h3>
+<input id="スピード" placeholder="スピード">
+<input id="スタミナ" placeholder="スタミナ">
+<input id="パワー" placeholder="パワー">
+<input id="根性" placeholder="根性">
+<input id="賢さ" placeholder="賢さ">
 </div>
 
 <button onclick="run()">抽選開始</button>
 
 <h2 id="result"></h2>
-
-<div class="log" id="log"></div>
+<div id="log" class="log"></div>
 
 <script src="script.js"></script>
 </body>
