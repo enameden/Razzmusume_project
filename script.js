@@ -7,7 +7,11 @@ Promise.all([
   systemData = s;
   raceData = r;
 
+  console.log("読み込み成功", raceData); // ←追加（確認用）
+
   init(); // ←これ重要
+  }).catch(err=>{
+  console.error("読み込み失敗", err);
 });
 
 function sleep(ms){
