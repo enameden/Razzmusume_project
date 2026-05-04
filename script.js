@@ -57,7 +57,8 @@ function init(){
 // レース情報表示
 // =====================
 function updateRaceInfo(){
-  const race = raceData.races[raceSelect.value];
+  const raceSelect = document.getElementById("raceSelect");
+const race = raceData.races[raceSelect.value];
 
   document.getElementById("playersDisplay").innerHTML = `
     🏁 ${race.name}<br>
