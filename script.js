@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   
 let systemData, raceData;
+  let phaseIndex = 0;
+let currentStats = {};
+let currentRace = null;
 
 // =====================
 // 初期ロード
@@ -133,89 +136,124 @@ function syncBar(name){
 // =====================
 // メイン処理
 // =====================
-async function run(){
+async function nextPhase(){
 
-  const log = document.getElementById("log");
-  const result = document.getElementById("result");
+  const btn = document.getElementById("raceBtn");
 
-  log.innerHTML="";
-  result.innerText="・・・";
+  // 初回（初期化）
+  if(phaseIndex === 0){
 
-  addLog("レース開始！");
-  await sleep(500);
+    currentRace = raceData.races[raceSelect.value];
 
-  const race = raceData.races[document.getElementById("raceSelect").value];
+    currentStats = {
+      スピード:+スピード.value,
+      スタミナ:+スタミナ.value,
+      パワー:+パワー.value,
+      根性:+根性.value,
+      賢さ:+賢さ.value
+    };
 
-  let stats={
-    スピード:+スピード.value,
-    スタミナ:+スタミナ.value,
-    パワー:+パワー.value,
-    根性:+根性.value,
-    賢さ:+賢さ.value
-  };
+    // やる気
+    const mult = systemData.motivation[motivation.value];
+    for(let k in currentStats) currentStats[k]*=mult;
 
-  // やる気
-  const mult = systemData.motivation[motivation.value];
-  for(let k in stats) stats[k]*=mult;
+    addLog("レース準備完了！");
+  }
 
   // 天候
-  const w = weightedRandom(systemData.weather);
-  applyEffects(stats,w.effects);
+  if(phaseIndex === 0){
+    const w = weightedRandom(systemData.weather);
+    applyEffects(currentStats, w.effects);
+    addLog("天候：" + w.name);
+  }
 
-  addLog("天候：" + w.name);
-  await sleep(500);
+  // 各フェーズ
+  if(phaseIndex >= 1 && phaseIndex <= 4){
 
-  // フェーズ
-  for(const phase of systemData.phases){
+    const phase = systemData.phases[phaseIndex-1];
 
     let ev = weightedRandom(phase.events);
     if(ev.subEvents) ev = weightedRandom(ev.subEvents);
 
-    applyEffects(stats,ev.effects);
+    applyEffects(currentStats, ev.effects);
 
     addLog(`${phase.name}：${ev.name}`);
-    await sleep(500);
   }
 
-  // 比較
-  let points=[25,25,25,25];
+  // 最終結果
+  if(phaseIndex === 5){
 
-  applyComparison(stats,race.reference,systemData.thresholds,points,1.0);
-  applyComparison(stats,race.rival,systemData.thresholds,points,1.0);
+    let points=[25,25,25,25];
 
-  const mob = generateMob(race.reference,race.mobMin,race.mobMax);
-  applyComparison(stats,mob,systemData.thresholds,points,0.5);
+    applyComparison(currentStats,currentRace.reference,systemData.thresholds,points,1);
+    applyComparison(currentStats,currentRace.rival,systemData.thresholds,points,1);
 
-  points = points.map(p=>Math.max(0,p));
+    const mob = generateMob(currentRace.reference,currentRace.mobMin,currentRace.mobMax);
+    applyComparison(currentStats,mob,systemData.thresholds,points,0.5);
 
-  const total = points.reduce((a,b)=>a+b,0);
-  const probs = total===0 ? [0.25,0.25,0.25,0.25] : points.map(p=>p/total);
+    points = points.map(p=>Math.max(0,p));
 
-  let r=Math.random();
-  let stage=3;
+    const total = points.reduce((a,b)=>a+b,0);
+    const probs = points.map(p=>p/total);
 
-  for(let i=0;i<4;i++){
-    if(r<probs[i]){stage=i;break;}
-    r-=probs[i];
+    let r=Math.random();
+    let stage=3;
+
+    for(let i=0;i<4;i++){
+      if(r<probs[i]){stage=i;break;}
+      r-=probs[i];
+    }
+
+    const n = currentRace.players;
+
+    let min,max;
+    if(stage===0){min=1;max=1;}
+    else if(stage===1){min=2;max=Math.floor(n*0.3);}
+    else if(stage===2){min=Math.floor(n*0.3)+1;max=Math.floor(n*0.6);}
+    else{min=Math.floor(n*0.6)+1;max=n;}
+
+    const rank=Math.floor(Math.random()*(max-min+1))+min;
+
+    showResult(rank);
   }
 
-  const n = race.players;
+  phaseIndex++;
 
-  const p30 = Math.floor(n*0.3);
-  const p60 = Math.floor(n*0.6);
+  // ボタン更新
+  btn.innerText = phaseLabels[phaseIndex] || "終了";
 
-  let min,max;
-
-  if(stage===0){min=1;max=1;}
-  else if(stage===1){min=2;max=p30;}
-  else if(stage===2){min=p30+1;max=p60;}
-  else{min=p60+1;max=n;}
-
-  const rank=Math.floor(Math.random()*(max-min+1))+min;
-
-  result.innerText=`結果：${rank}位`;
-
-  addLog(`最終順位：${rank}位`);
+  // 終了後リセット
+  if(phaseIndex > 5){
+    phaseIndex = 0;
+    btn.innerText = phaseLabels[0];
+  }
 }
+  function showResult(rank){
 
-});
+  const result = document.getElementById("result");
+
+  result.style.opacity = 0;
+  result.innerText = `結果：${rank}位`;
+
+  setTimeout(()=>{
+    result.style.transition = "0.5s";
+    result.style.opacity = 1;
+  },100);
+
+  if(rank === 1){
+    result.style.color = "gold";
+    result.style.textShadow = "0 0 20px gold";
+  }else if(rank <= 3){
+    result.style.color = "silver";
+  }else{
+    result.style.color = "#ccc";
+  }
+}
+  function updateRaceInfo(){
+  const race = raceData.races[raceSelect.value];
+
+  document.getElementById("playersDisplay").innerHTML = `
+    🏁 ${race.name}<br>
+    👥 出走：${race.players}人
+  `;
+}
