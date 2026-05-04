@@ -209,3 +209,16 @@ async function run(){
 async function run(){
   addRaceLog("序盤", ev.name);
 await sleep(500);
+function syncBar(name){
+  const input = document.getElementById(name);
+  let val = parseInt(input.value);
+
+  if(isNaN(val) || val < 0) val = 0;
+
+  // 上限（任意調整）
+  const max = 200;
+
+  const width = Math.min(val, max) / max * 100;
+
+  document.getElementById("bar_"+name).style.width = width + "%";
+}
