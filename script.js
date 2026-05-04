@@ -222,3 +222,13 @@ function syncBar(name){
 
   document.getElementById("bar_"+name).style.width = width + "%";
 }
+window.onload = () => {
+  ["スピード","スタミナ","パワー","根性","賢さ"].forEach(syncBar);
+};
+  if(val > 150){
+  bar.style.background = "#ff9800"; // 強い
+}else if(val > 100){
+  bar.style.background = "#4caf50"; // 普通
+}else{
+  bar.style.background = "#2196f3"; // 弱め
+}
