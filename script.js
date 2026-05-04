@@ -168,7 +168,7 @@ async function run(){
   const probs = points.map(p=>p/total);
 
   for(let i=0;i<4;i++){
-    document.getElementById("p"+i).style.width = (probs[i]*100)+"%";
+    .style.width = (probs[i]*100)+"%";
   }
 
   await sleep(800);
