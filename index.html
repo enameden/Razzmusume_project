@@ -123,29 +123,34 @@ button:hover {
 <div class="panel">
 <h3>ステータス</h3>
 
-<div class="stat">スピード
-<input id="スピード">
-<div class="bar"><div id="bar_スピード" class="fill"></div></div>
+<div class="stat">
+  <label>スピード</label>
+  <input type="number" id="スピード" value="100" min="1" oninput="syncBar('スピード')">
+  <div class="bar"><div id="bar_スピード" class="fill"></div></div>
 </div>
 
-<div class="stat">スタミナ
-<input id="スタミナ">
-<div class="bar"><div id="bar_スタミナ" class="fill"></div></div>
+<div class="stat">
+  <label>スタミナ</label>
+  <input type="number" id="スタミナ" value="100" min="1" oninput="syncBar('スタミナ')">
+  <div class="bar"><div id="bar_スタミナ" class="fill"></div></div>
 </div>
 
-<div class="stat">パワー
-<input id="パワー">
-<div class="bar"><div id="bar_パワー" class="fill"></div></div>
+<div class="stat">
+  <label>パワー</label>
+  <input type="number" id="パワー" value="100" min="1" oninput="syncBar('パワー')">
+  <div class="bar"><div id="bar_パワー" class="fill"></div></div>
 </div>
 
-<div class="stat">根性
-<input id="根性">
-<div class="bar"><div id="bar_根性" class="fill"></div></div>
+<div class="stat">
+  <label>根性</label>
+  <input type="number" id="根性" value="100" min="1" oninput="syncBar('根性')">
+  <div class="bar"><div id="bar_根性" class="fill"></div></div>
 </div>
 
-<div class="stat">賢さ
-<input id="賢さ">
-<div class="bar"><div id="bar_賢さ" class="fill"></div></div>
+<div class="stat">
+  <label>賢さ</label>
+  <input type="number" id="賢さ" value="100" min="1" oninput="syncBar('賢さ')">
+  <div class="bar"><div id="bar_賢さ" class="fill"></div></div>
 </div>
 
 </div>
