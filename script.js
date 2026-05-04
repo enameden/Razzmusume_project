@@ -41,6 +41,10 @@ function updateRaceInfo(){
   document.getElementById("playersDisplay").innerText = race.players + "人";
 }
 
+function updateRaceInfo(){
+  const race = raceData.races[raceSelect.value];
+  document.getElementById("playersDisplay").innerText = race.players + "人";
+
 function weightedRandom(list){
   const total = list.reduce((a,b)=>a+b.weight,0);
   let r = Math.random()*total;
