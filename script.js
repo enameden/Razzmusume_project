@@ -1,15 +1,13 @@
-let data;
+let systemData, raceData;
 
-fetch('data.json').then(r=>r.json()).then(d=>{
-  data = d;
+Promise.all([
+  fetch('data/opponent_data.json').then(r=>r.json()),
+  fetch('data/race_data.json').then(r=>r.json())
+]).then(([s, r])=>{
+  systemData = s;
+  raceData = r;
 
-  for(let i=9;i<=18;i++){
-    players.innerHTML += `<option>${i}</option>`;
-  }
-
-  data.races.forEach((r,i)=>{
-    raceSelect.innerHTML += `<option value="${i}">${r.name}</option>`;
-  });
+  init();
 });
 
 function sleep(ms){
