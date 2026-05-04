@@ -116,3 +116,24 @@ function run(){
   result.innerText=`結果：${rank}位`;
   logDiv.innerHTML=log.join("<br>");
 }
+function updateBars(stats){
+  for(let k in stats){
+    const el = document.getElementById("bar_"+k);
+    if(el){
+      el.style.width = (stats[k] / 2) + "px";
+    }
+  }
+}
+function addLog(text){
+  log.innerHTML += `<div class="log-line">${text}</div>`;
+  log.scrollTop = log.scrollHeight;
+}
+log.innerHTML = "";
+
+addLog(`レース開始！`);
+
+addLog(`天候：${w.name}`);
+for(let i=0;i<4;i++){
+  document.getElementById("p"+i).style.width = (probs[i]*100)+"%";
+}
+updateBars(stats);
