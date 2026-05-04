@@ -47,8 +47,12 @@ function init(){
 // レース情報表示
 // =====================
 function updateRaceInfo(){
-  const race = raceData.races[document.getElementById("raceSelect").value];
-  document.getElementById("playersDisplay").innerText = race.players + "人";
+  const race = raceData.races[raceSelect.value];
+
+  document.getElementById("playersDisplay").innerHTML = `
+    🏁 ${race.name}<br>
+    👥 出走：${race.players}人
+  `;
 }
 
 // =====================
@@ -225,7 +229,15 @@ async function nextPhase(){
   // 終了後リセット
   if(phaseIndex > 5){
     phaseIndex = 0;
-    btn.innerText = phaseLabels[0];
+    const phaseLabels = [
+  "入力完了",
+  "天候決定",
+  "序盤",
+  "中盤",
+  "終盤",
+  "結果",
+  "リセット"
+];
   }
 }
   function showResult(rank){
@@ -249,11 +261,4 @@ async function nextPhase(){
     result.style.color = "#ccc";
   }
 }
-  function updateRaceInfo(){
-  const race = raceData.races[raceSelect.value];
 
-  document.getElementById("playersDisplay").innerHTML = `
-    🏁 ${race.name}<br>
-    👥 出走：${race.players}人
-  `;
-}
