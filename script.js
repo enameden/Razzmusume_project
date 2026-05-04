@@ -4,8 +4,12 @@ Promise.all([
   fetch('data/system.json').then(r=>r.json()),
   fetch('data/races.json').then(r=>r.json())
 ]).then(([s, r])=>{
-  systemData = s;
-  raceData = r;
+  systemData.motivation
+systemData.thresholds
+systemData.weather
+systemData.phases
+
+raceData.races
 
   init();
 });
