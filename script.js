@@ -4,14 +4,10 @@ Promise.all([
   fetch('data/system.json').then(r=>r.json()),
   fetch('data/races.json').then(r=>r.json())
 ]).then(([s, r])=>{
-  systemData.motivation
-systemData.thresholds
-systemData.weather
-systemData.phases
+  systemData = s;
+  raceData = r;
 
-raceData.races
-
-  init();
+  init(); // ←これ重要
 });
 
 function sleep(ms){
@@ -260,6 +256,25 @@ function syncBar(name){
   }else if(val >= 80){
     bar.style.background = "linear-gradient(90deg, #2196f3, #03a9f4)"; // 普通
   }else{
-    bar.style.background = "linear-gradient(90deg, #9e9e9e, #bdbdbd)"; // 弱
+    bar.style.background = "linear-gradient(90deg, #9e9e9e, #bdbdbd)"; // 弱    
   }
+}
+function init(){
+
+  // 人数プルダウン
+  const playersEl = document.getElementById("players");
+  playersEl.innerHTML = "";
+
+  for(let i=9;i<=18;i++){
+    playersEl.innerHTML += `<option value="${i}">${i}人</option>`;
+  }
+
+  // レースプルダウン
+  const raceEl = document.getElementById("raceSelect");
+  raceEl.innerHTML = "";
+
+  raceData.races.forEach((r,i)=>{
+    raceEl.innerHTML += `<option value="${i}">${r.name}</option>`;
+  });
+
 }
