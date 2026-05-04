@@ -12,6 +12,10 @@ fetch('data.json').then(r=>r.json()).then(d=>{
   });
 });
 
+function sleep(ms){
+  return new Promise(res=>setTimeout(res,ms));
+}
+
 function weightedRandom(list){
   const total = list.reduce((a,b)=>a+b.weight,0);
   let r = Math.random()*total;
@@ -49,8 +53,64 @@ function applyComparison(player,target,thresholds,points,weight){
   }
 }
 
-function run(){
-  let log=[];
+function addLog(text){
+  log.innerHTML += `<div class="log-line">${text}</div>`;
+  log.scrollTop = log.scrollHeight;
+}
+
+function logEffects(effects){
+  for(let k in effects){
+    const val = effects[k];
+    const sign = val>0?"+":"";
+    addLog(`${k} ${sign}${Math.round(val*100)}%`);
+  }
+}
+
+const commentary = {
+  天候:{
+    晴れ:"晴天！絶好のコンディション！",
+    曇り:"少し重たいバ場状態だ…",
+    雨:"雨で足元が悪い！"
+  },
+  序盤:{
+    コンセントレーション:"完璧なスタート！",
+    出遅れ:"出遅れた！",
+    通常:"まずは無難なスタート。"
+  },
+  位置取り争い:{
+    成功:"いい位置を確保！",
+    拮抗:"位置取りは互角。",
+    失敗:"包まれた！厳しい展開。"
+  },
+  中盤:{
+    "前に出る！":"一気に前へ！",
+    "パワー上昇":"パワーを活かして押し上げる！",
+    "スピード低下":"少しペースダウン…",
+    "掛かり":"掛かってしまった！"
+  },
+  終盤:{
+    "全力スパート！":"ここで加速！！",
+    "追い比べ":"激しい叩き合い！",
+    "脚色まかせ":"最後は脚頼み！"
+  }
+};
+
+function updateBars(stats){
+  for(let k in stats){
+    const el = document.getElementById("bar_"+k);
+    if(el){
+      el.style.width = (stats[k]/2)+"px";
+    }
+  }
+}
+
+async function run(){
+
+  log.innerHTML="";
+  result.innerText="・・・";
+
+  addLog("レース開始！");
+  await sleep(500);
 
   const race = data.races[raceSelect.value];
 
@@ -69,16 +129,29 @@ function run(){
   // 天候
   const w = weightedRandom(data.weather);
   applyEffects(stats,w.effects);
-  log.push(`天候：${w.name}`);
+
+  addLog(commentary.天候[w.name] || w.name);
+  logEffects(w.effects);
+  await sleep(600);
 
   // フェーズ
   for(const phase of data.phases){
+
     let ev = weightedRandom(phase.events);
     if(ev.subEvents) ev = weightedRandom(ev.subEvents);
 
     applyEffects(stats,ev.effects);
-    log.push(`${phase.name}：${ev.name}`);
+
+    addLog(commentary[phase.name]?.[ev.name] || `${phase.name}：${ev.name}`);
+    logEffects(ev.effects);
+
+    updateBars(stats);
+
+    await sleep(700);
   }
+
+  addLog("最終直線――！");
+  await sleep(800);
 
   // 比較
   let points=[25,25,25,25];
@@ -93,6 +166,12 @@ function run(){
 
   const total = points.reduce((a,b)=>a+b,0);
   const probs = points.map(p=>p/total);
+
+  for(let i=0;i<4;i++){
+    document.getElementById("p"+i).style.width = (probs[i]*100)+"%";
+  }
+
+  await sleep(800);
 
   let r=Math.random();
   let stage=0;
@@ -113,51 +192,20 @@ function run(){
   const [min,max]=range(stage);
   const rank=Math.floor(Math.random()*(max-min+1))+min;
 
-  result.innerText=`結果：${rank}位`;
-  logDiv.innerHTML=log.join("<br>");
-}
-function updateBars(stats){
-  for(let k in stats){
-    const el = document.getElementById("bar_"+k);
-    if(el){
-      el.style.width = (stats[k] / 2) + "px";
-    }
-  }
-}
-function addLog(text){
-  log.innerHTML += `<div class="log-line">${text}</div>`;
-  log.scrollTop = log.scrollHeight;
-}
-log.innerHTML = "";
+  await sleep(1000);
 
-addLog(`レース開始！`);
+  result.innerText=`結果：${rank}位！！`;
 
-addLog(`天候：${w.name}`);
-for(let i=0;i<4;i++){
-  document.getElementById("p"+i).style.width = (probs[i]*100)+"%";
-}
-updateBars(stats);
-const commentary = {
-  天候: {
-    晴れ: "晴天！絶好のコンディション！",
-    曇り: "少し重たいバ場状態だ…",
-    雨: "雨で足元が悪い！パワーが試される！"
-  },
-  序盤: {
-    コンセントレーション: "完璧なスタートを決めた！",
-    出遅れ: "出遅れた！これは痛い！",
-    通常: "各ウマ娘一斉にスタートしました！"
-  },
-  終盤: {
-    "全力スパート！": "【全力スパート】ここで一気に加速！勝負を決めることができるか！",
-    "追い比べ": "【追い比べ】激しい競り合い！勝者は誰のものに！",
-    "脚色まかせ": "【脚色まかせ】最後は脚に任せての追い上げ！果たして結果は…！"
+  if(rank===1){
+    result.style.color="gold";
+  }else if(rank<=3){
+    result.style.color="silver";
+  }else{
+    result.style.color="#ccc";
   }
-};
-function addRaceLog(type, key){
-  if(commentary[type] && commentary[type][key]){
-    addLog(commentary[type][key]);
-  } else {
-    addLog(`${type}：${key}`);
-  }
+
+  addLog(`最終順位：${rank}位`);
 }
+async function run(){
+  addRaceLog("序盤", ev.name);
+await sleep(500);
