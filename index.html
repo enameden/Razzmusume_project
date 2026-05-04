@@ -2,46 +2,169 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>レース抽選ツール</title>
+<title>レースシミュレーター</title>
+
 <style>
-body { font-family:sans-serif; background:#111; color:#eee; padding:20px; }
-input, select, button { margin:5px; padding:5px; }
-.box { margin-bottom:15px; }
-.log { background:#222; padding:10px; height:220px; overflow:auto; }
+body {
+  background:#0b0f1a;
+  color:#fff;
+  font-family:sans-serif;
+  text-align:center;
+}
+
+.container {
+  max-width:500px;
+  margin:auto;
+}
+
+.panel {
+  background:#1a2233;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+  box-shadow:0 0 10px #000;
+}
+
+h1 {
+  color:#6cf;
+}
+
+.stat {
+  text-align:left;
+  margin:5px 0;
+}
+
+.bar {
+  width:100%;
+  height:12px;
+  background:#333;
+  border-radius:5px;
+}
+
+.fill {
+  height:100%;
+  background:linear-gradient(90deg,#4caf50,#8bc34a);
+  border-radius:5px;
+}
+
+button {
+  padding:10px 20px;
+  background:#2a3a55;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+button:hover {
+  background:#3f5a88;
+}
+
+.log {
+  height:200px;
+  overflow:auto;
+  text-align:left;
+  background:#111;
+  padding:10px;
+  border-radius:5px;
+}
+
+.log-line {
+  animation: fade 0.3s;
+}
+
+@keyframes fade {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.result {
+  font-size:40px;
+  color:gold;
+  text-shadow:0 0 10px gold;
+}
+
+.prob-bar {
+  height:10px;
+  background:#444;
+  margin:3px 0;
+}
+
+.prob-fill {
+  height:100%;
+  background:#6cf;
+}
 </style>
 </head>
+
 <body>
 
-<h1>レース抽選ツール</h1>
+<div class="container">
 
-<div class="box">
-  <label>レース：</label>
-  <select id="raceSelect"></select>
+<h1>レースシミュレーター</h1>
 
-  <label>人数：</label>
-  <select id="players"></select>
+<div class="panel">
+レース：
+<select id="raceSelect"></select>
 
-  <label>やる気：</label>
-  <select id="motivation">
-    <option>普通</option>
-    <option>好調</option>
-    <option>絶好調</option>
-  </select>
+人数：
+<select id="players"></select>
+
+やる気：
+<select id="motivation">
+<option>普通</option>
+<option>好調</option>
+<option>絶好調</option>
+</select>
 </div>
 
-<div class="box">
-<h3>プレイヤーステータス</h3>
-<input id="スピード" placeholder="スピード">
-<input id="スタミナ" placeholder="スタミナ">
-<input id="パワー" placeholder="パワー">
-<input id="根性" placeholder="根性">
-<input id="賢さ" placeholder="賢さ">
+<div class="panel">
+<h3>ステータス</h3>
+
+<div class="stat">スピード
+<input id="スピード">
+<div class="bar"><div id="bar_スピード" class="fill"></div></div>
 </div>
 
-<button onclick="run()">抽選開始</button>
+<div class="stat">スタミナ
+<input id="スタミナ">
+<div class="bar"><div id="bar_スタミナ" class="fill"></div></div>
+</div>
 
-<h2 id="result"></h2>
-<div id="log" class="log"></div>
+<div class="stat">パワー
+<input id="パワー">
+<div class="bar"><div id="bar_パワー" class="fill"></div></div>
+</div>
+
+<div class="stat">根性
+<input id="根性">
+<div class="bar"><div id="bar_根性" class="fill"></div></div>
+</div>
+
+<div class="stat">賢さ
+<input id="賢さ">
+<div class="bar"><div id="bar_賢さ" class="fill"></div></div>
+</div>
+
+</div>
+
+<button onclick="run()">レース開始</button>
+
+<div class="panel">
+<h2 id="result" class="result"></h2>
+
+<div>
+1位<div class="prob-bar"><div id="p0" class="prob-fill"></div></div>
+上位<div class="prob-bar"><div id="p1" class="prob-fill"></div></div>
+中位<div class="prob-bar"><div id="p2" class="prob-fill"></div></div>
+下位<div class="prob-bar"><div id="p3" class="prob-fill"></div></div>
+</div>
+
+</div>
+
+<div class="panel log" id="log"></div>
+
+</div>
 
 <script src="script.js"></script>
 </body>
