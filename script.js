@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   
 let systemData, raceData;
-  let phaseIndex = 0;
-let currentStats = {};
-let currentRace = null;
-
-      const phaseLabels = [
+   const phaseLabels = [
   "入力完了",
   "天候決定",
   "序盤",
@@ -14,6 +10,9 @@ let currentRace = null;
   "結果",
   "リセット"
 ];
+  let phaseIndex = 0;
+let currentStats = {};
+let currentRace = null;
 
 // =====================
 // 初期ロード
