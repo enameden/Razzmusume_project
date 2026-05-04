@@ -68,6 +68,7 @@ function weightedRandom(list){
   for(const item of list){
     if(r < item.weight) return item;
     r -= item.weight;
+    return list[list.length - 1];
   }
 }
 
