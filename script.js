@@ -25,8 +25,19 @@ Promise.all([
 // =====================
 // 初期化
 // =====================
+  
 function init(){
 
+  const phaseLabels = [
+  "入力完了",
+  "天候決定",
+  "序盤",
+  "中盤",
+  "終盤",
+  "結果",
+  "リセット"
+];
+  
   const raceEl = document.getElementById("raceSelect");
 
   raceEl.innerHTML = "";
@@ -230,15 +241,6 @@ async function nextPhase(){
   // 終了後リセット
   if(phaseIndex > 5){
     phaseIndex = 0;
-    const phaseLabels = [
-  "入力完了",
-  "天候決定",
-  "序盤",
-  "中盤",
-  "終盤",
-  "結果",
-  "リセット"
-];
   }
 }
   function showResult(rank){
