@@ -9,13 +9,36 @@ Promise.all([
 
   console.log("読み込み成功", raceData); // ←追加（確認用）
 
-  init(); // ←これ重要
+  function init(){
+
+  // ▼ レースプルダウン生成
+  const raceEl = document.getElementById("raceSelect");
+  raceEl.innerHTML = "";
+
+  raceData.races.forEach((r,i)=>{
+    raceEl.innerHTML += `<option value="${i}">${r.name}</option>`;
+  });
+
+  // ▼ ★ここを追加する
+  raceEl.addEventListener("change", updateRaceInfo);
+
+  // ▼ 初期表示
+  updateRaceInfo();
+}
   }).catch(err=>{
   console.error("読み込み失敗", err);
 });
 
 function sleep(ms){
   return new Promise(res=>setTimeout(res,ms));
+}
+
+function updateRaceInfo(){
+
+  const race = raceData.races[raceSelect.value];
+
+  // 表示用
+  document.getElementById("playersDisplay").innerText = race.players + "人";
 }
 
 function weightedRandom(list){
