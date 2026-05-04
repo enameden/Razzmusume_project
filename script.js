@@ -1,8 +1,8 @@
 let systemData, raceData;
 
 Promise.all([
-  fetch('data/opponent_data.json').then(r=>r.json()),
-  fetch('data/race_data.json').then(r=>r.json())
+  fetch('data/system.json').then(r=>r.json()),
+  fetch('data/races.json').then(r=>r.json())
 ]).then(([s, r])=>{
   systemData = s;
   raceData = r;
