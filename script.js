@@ -27,16 +27,6 @@ Promise.all([
 // =====================
   
 function init(){
-
-  const phaseLabels = [
-  "入力完了",
-  "天候決定",
-  "序盤",
-  "中盤",
-  "終盤",
-  "結果",
-  "リセット"
-];
   
   const raceEl = document.getElementById("raceSelect");
 
@@ -76,11 +66,13 @@ function sleep(ms){
 function weightedRandom(list){
   const total = list.reduce((a,b)=>a+b.weight,0);
   let r = Math.random()*total;
+
   for(const item of list){
     if(r < item.weight) return item;
     r -= item.weight;
-    return list[list.length - 1];
   }
+
+  return list[list.length - 1];
 }
 
 function applyEffects(stats, effects){
@@ -155,6 +147,16 @@ function syncBar(name){
 async function nextPhase(){
 
   const btn = document.getElementById("raceBtn");
+
+    const phaseLabels = [
+  "入力完了",
+  "天候決定",
+  "序盤",
+  "中盤",
+  "終盤",
+  "結果",
+  "リセット"
+];
 
   // 初回（初期化）
   if(phaseIndex === 0){
