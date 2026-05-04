@@ -137,3 +137,27 @@ for(let i=0;i<4;i++){
   document.getElementById("p"+i).style.width = (probs[i]*100)+"%";
 }
 updateBars(stats);
+const commentary = {
+  天候: {
+    晴れ: "晴天！絶好のコンディション！",
+    曇り: "少し重たいバ場状態だ…",
+    雨: "雨で足元が悪い！パワーが試される！"
+  },
+  序盤: {
+    コンセントレーション: "完璧なスタートを決めた！",
+    出遅れ: "出遅れた！これは痛い！",
+    通常: "各ウマ娘一斉にスタートしました！"
+  },
+  終盤: {
+    "全力スパート！": "【全力スパート】ここで一気に加速！勝負を決めることができるか！",
+    "追い比べ": "【追い比べ】激しい競り合い！勝者は誰のものに！",
+    "脚色まかせ": "【脚色まかせ】最後は脚に任せての追い上げ！果たして結果は…！"
+  }
+};
+function addRaceLog(type, key){
+  if(commentary[type] && commentary[type][key]){
+    addLog(commentary[type][key]);
+  } else {
+    addLog(`${type}：${key}`);
+  }
+}
