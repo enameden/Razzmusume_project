@@ -5,6 +5,16 @@ let systemData, raceData;
 let currentStats = {};
 let currentRace = null;
 
+      const phaseLabels = [
+  "入力完了",
+  "天候決定",
+  "序盤",
+  "中盤",
+  "終盤",
+  "結果",
+  "リセット"
+];
+
 // =====================
 // 初期ロード
 // =====================
@@ -147,16 +157,6 @@ function syncBar(name){
 async function nextPhase(){
 
   const btn = document.getElementById("raceBtn");
-
-    const phaseLabels = [
-  "入力完了",
-  "天候決定",
-  "序盤",
-  "中盤",
-  "終盤",
-  "結果",
-  "リセット"
-];
 
   // 初回（初期化）
   if(phaseIndex === 0){
