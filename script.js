@@ -234,3 +234,32 @@ window.onload = () => {
 }else{
   bar.style.background = "#2196f3"; // 弱め
 }
+function syncBar(name){
+  const input = document.getElementById(name);
+  const bar = document.getElementById("bar_"+name);
+  const label = document.getElementById("val_"+name);
+
+  let val = parseInt(input.value);
+
+  if(isNaN(val) || val < 0) val = 0;
+
+  const max = 200;
+  const percent = Math.min(val, max) / max * 100;
+
+  // 幅更新
+  bar.style.width = percent + "%";
+
+  // 数値表示
+  label.innerText = val;
+
+  // 色分岐（ここがポイント）
+  if(val >= 160){
+    bar.style.background = "linear-gradient(90deg, #ff9800, #ffc107)"; // 超強
+  }else if(val >= 120){
+    bar.style.background = "linear-gradient(90deg, #4caf50, #8bc34a)"; // 強
+  }else if(val >= 80){
+    bar.style.background = "linear-gradient(90deg, #2196f3, #03a9f4)"; // 普通
+  }else{
+    bar.style.background = "linear-gradient(90deg, #9e9e9e, #bdbdbd)"; // 弱
+  }
+}
