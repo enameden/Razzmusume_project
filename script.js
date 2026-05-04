@@ -265,5 +265,5 @@ async function nextPhase(){
   }else{
     result.style.color = "#ccc";
   }
-}
+});
 
