@@ -98,7 +98,20 @@ async function playRoulette(options, duration=1200){
   // 最終結果（★ここ1回だけ）
   const result = options[Math.floor(Math.random()*options.length)];
 
-  display.innerText = result;
+  window.syncBar = function(name){
+  const input = document.getElementById(name);
+  const bar = document.getElementById("bar_"+name);
+  const label = document.getElementById("val_"+name);
+
+  let val = parseInt(input.value);
+  if(isNaN(val) || val < 0) val = 0;
+
+  const max = 200;
+  const percent = Math.min(val, max) / max * 100;
+
+  bar.style.width = percent + "%";
+  label.innerText = val;
+}
 
   // 光る
   display.style.color = "#6cf";
