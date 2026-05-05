@@ -1,17 +1,17 @@
 .stat {
-  margin:12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .stat label {
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  margin-bottom:4px;
+  flex: 1;
+  text-align: left;
 }
 
 .stat input {
-  width:80px;
-  margin-bottom:6px;
+  width: 80px;
+  text-align: right;
 }
 
 .bar {
@@ -48,4 +48,34 @@
   margin-top: 5px;
   color: #fff;
   text-shadow: 0 0 10px #6cf;
+}
+
+button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  font-size: 14px;
+  background: radial-gradient(circle, #3f5a88, #1a2233);
+  border: 2px solid #6cf;
+}
+
+.prob-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.prob-bar {
+  flex: 1;
+  height: 10px;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.prob-fill {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, #6cf, #3af);
 }
