@@ -63,16 +63,28 @@ function updateRaceInfo(){
 const race = raceData.races[raceSelect.value];
 
   document.getElementById("playersDisplay").innerHTML = `
-    🏁 ${race.name}<br>
-    👥 出走：${race.players}人
-  `;
-}
+  👥 出走：${race.players}人
+`;
 
 // =====================
 // 共通関数
 // =====================
 function sleep(ms){
   return new Promise(res=>setTimeout(res,ms));
+}
+
+async function typeLog(text){
+  const log = document.getElementById("log");
+
+  let line = document.createElement("div");
+  log.appendChild(line);
+
+  for(let i=0;i<text.length;i++){
+    line.innerText += text[i];
+    await sleep(30);
+  }
+
+  log.scrollTop = log.scrollHeight;
 }
   
 async function playRoulette(options, duration=1200){
@@ -169,6 +181,37 @@ function applyComparison(player,target,thresholds,points,weight){
   }
 }
 
+function calculateProbabilities(stats, race){
+
+  let points=[25,25,25,25];
+
+  applyComparison(stats, race.reference, systemData.thresholds, points, 1);
+  applyComparison(stats, race.rival, systemData.thresholds, points, 1);
+
+  const mob = generateMob(race.reference, race.mobMin, race.mobMax);
+  applyComparison(stats, mob, systemData.thresholds, points, 0.5);
+
+  points = points.map(p=>Math.max(0,p));
+
+  const total = points.reduce((a,b)=>a+b,0);
+  if(total === 0) return [0.25,0.25,0.25,0.25];
+
+  return points.map(p=>p/total);
+}
+
+  function updateProbUI(probs){
+
+  probs.forEach((p,i)=>{
+    const bar = document.getElementById("prob"+i);
+    const text = document.getElementById("prob"+i+"_text");
+
+    const percent = Math.round(p*100);
+
+    bar.style.width = percent + "%";
+    text.innerText = percent + "%";
+  });
+}
+  
 // =====================
 // ログ
 // =====================
@@ -177,40 +220,23 @@ function addLog(text){
   log.innerHTML += `<div>${text}</div>`;
   log.scrollTop = log.scrollHeight;
 }
-
-// =====================
-// ステータスUI
-// =====================
-function syncBar(name){
-  const input = document.getElementById(name);
-  const bar = document.getElementById("bar_"+name);
-  const label = document.getElementById("val_"+name);
-
-  let val = parseInt(input.value);
-  if(isNaN(val) || val < 0) val = 0;
-
-  const max = 200;
-  const percent = Math.min(val, max) / max * 100;
-
-  bar.style.width = percent + "%";
-  label.innerText = val;
-
-  if(val >= 160){
-    bar.style.background = "linear-gradient(90deg,#ff9800,#ffc107)";
-  }else if(val >= 120){
-    bar.style.background = "linear-gradient(90deg,#4caf50,#8bc34a)";
-  }else if(val >= 80){
-    bar.style.background = "linear-gradient(90deg,#2196f3,#03a9f4)";
-  }else{
-    bar.style.background = "linear-gradient(90deg,#9e9e9e,#bdbdbd)";
-  }
-}
-
+  
 // =====================
 // メイン処理
 // =====================
 async function nextPhase(){
 
+if(phaseIndex === 0){
+
+  currentRace = raceData.races[document.getElementById("raceSelect").value];
+
+  await typeLog("ライバルステータス：");
+
+  for(let k in currentRace.rival){
+    await typeLog(`${k}：${currentRace.rival[k]}`);
+  }
+}
+  
   const btn = document.getElementById("raceBtn");
 
   // 初回（初期化）
@@ -238,7 +264,7 @@ currentRace = raceData.races[raceSelect.value];
   if(phaseIndex === 0){
     const w = weightedRandom(systemData.weather);
     applyEffects(currentStats, w.effects);
-    addLog("天候：" + w.name);
+    await typeLog("天候：" + w.name);
   }
 
   // 各フェーズ
@@ -262,9 +288,8 @@ if(phaseIndex >= 1 && phaseIndex <= 4){
 
   addLog(`${phase.name}：${ev.name}`);
 
-  // ★バー更新（ついでに入れとくと神）
-  ["スピード","スタミナ","パワー","根性","賢さ"].forEach(syncBar);
-}
+  const probs = calculateProbabilities(currentStats, currentRace);
+updateProbUI(probs);
 
   // 最終結果
   if(phaseIndex === 5){
