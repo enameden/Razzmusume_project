@@ -109,9 +109,6 @@ async function playRoulette(options, duration=1200){
     display.style.transform = "scale(1)";
   },200);
 
-  return result;
-}
-
   const result = options[Math.floor(Math.random()*options.length)];
 
   log.innerHTML += `<div style="color:#6cf">★ ${result}</div>`;
