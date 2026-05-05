@@ -74,7 +74,29 @@ const race = raceData.races[raceSelect.value];
 function sleep(ms){
   return new Promise(res=>setTimeout(res,ms));
 }
+  
+async function playRoulette(options, duration=1000){
+  const log = document.getElementById("log");
 
+  let i = 0;
+  const interval = 50;
+  const loops = duration / interval;
+
+  for(let t=0; t<loops; t++){
+    const rand = options[Math.floor(Math.random()*options.length)];
+    log.innerHTML += `<div style="opacity:0.5">▶ ${rand}</div>`;
+    log.scrollTop = log.scrollHeight;
+    await sleep(interval);
+  }
+
+  const result = options[Math.floor(Math.random()*options.length)];
+
+  log.innerHTML += `<div style="color:#6cf">★ ${result}</div>`;
+  log.scrollTop = log.scrollHeight;
+
+  return result;
+}
+  
 function weightedRandom(list){
   const total = list.reduce((a,b)=>a+b.weight,0);
   let r = Math.random()*total;
@@ -189,17 +211,29 @@ currentRace = raceData.races[raceSelect.value];
   }
 
   // 各フェーズ
-  if(phaseIndex >= 1 && phaseIndex <= 4){
+if(phaseIndex >= 1 && phaseIndex <= 4){
 
-    const phase = systemData.phases[phaseIndex-1];
+  const phase = systemData.phases[phaseIndex-1];
 
-    let ev = weightedRandom(phase.events);
-    if(ev.subEvents) ev = weightedRandom(ev.subEvents);
+  const names = phase.events.map(e=>e.name);
 
-    applyEffects(currentStats, ev.effects);
+  const resultName = await playRoulette(names);
 
-    addLog(`${phase.name}：${ev.name}`);
+  let ev = phase.events.find(e=>e.name === resultName);
+
+  if(ev.subEvents){
+    const subNames = ev.subEvents.map(s=>s.name);
+    const subResult = await playRoulette(subNames);
+    ev = ev.subEvents.find(s=>s.name === subResult);
   }
+
+  applyEffects(currentStats, ev.effects);
+
+  addLog(`${phase.name}：${ev.name}`);
+
+  // ★バー更新（ついでに入れとくと神）
+  ["スピード","スタミナ","パワー","根性","賢さ"].forEach(syncBar);
+}
 
   // 最終結果
   if(phaseIndex === 5){
