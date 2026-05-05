@@ -48,7 +48,7 @@ h1 {
 }
 
 button {
-  padding:20px 20px;
+  padding:10px 20px;
   background:#2a3a55;
   border:none;
   color:#fff;
@@ -130,32 +130,22 @@ button:hover {
 
 <div class="stat">
   <label>スピード <span id="val_スピード"></span></label>
-  <input type="number" id="スピード" value="" min="1" oninput="syncBar('スピード')">
-  <div class="bar"><div id="bar_スピード" class="fill"></div></div>
 </div>
 
 <div class="stat">
   <label>スタミナ <span id="val_スタミナ"></span></label>
-  <input type="number" id="スタミナ" value="" min="1" oninput="syncBar('スタミナ')">
-  <div class="bar"><div id="bar_スタミナ" class="fill"></div></div>
 </div>
 
 <div class="stat">
   <label>パワー <span id="val_パワー"></span></label>
-  <input type="number" id="パワー" value="" min="1" oninput="syncBar('パワー')">
-  <div class="bar"><div id="bar_パワー" class="fill"></div></div>
 </div>
 
 <div class="stat">
   <label>根性 <span id="val_根性"></span></label>
-  <input type="number" id="根性" value="" min="1" oninput="syncBar('根性')">
-  <div class="bar"><div id="bar_根性" class="fill"></div></div>
 </div>
 
 <div class="stat">
   <label>賢さ <span id="val_賢さ"></span></label>
-  <input type="number" id="賢さ" value="" min="1" oninput="syncBar('賢さ')">
-  <div class="bar"><div id="bar_賢さ" class="fill"></div></div>
 </div>
 
 </div>
@@ -164,8 +154,38 @@ button:hover {
 
 <button id="raceBtn">入力完了</button>
 
-<div class="panel">
-<h2 id="result" class="result"></h2>
+<div id="rouletteBox">
+  <div id="rouletteLabel">イベント抽選</div>
+  <div id="rouletteDisplay">---</div>
+</div>
+
+  <div id="probBox" class="panel">
+  <div class="prob-row">
+    <span>🥇 1位</span>
+    <div class="prob-bar"><div id="prob0" class="prob-fill"></div></div>
+    <span id="prob0_text">25%</span>
+  </div>
+
+  <div class="prob-row">
+    <span>🥈 上位30%</span>
+    <div class="prob-bar"><div id="prob1" class="prob-fill"></div></div>
+    <span id="prob1_text">25%</span>
+  </div>
+
+  <div class="prob-row">
+    <span>🥉 中位</span>
+    <div class="prob-bar"><div id="prob2" class="prob-fill"></div></div>
+    <span id="prob2_text">25%</span>
+  </div>
+
+  <div class="prob-row">
+    <span>📉 下位</span>
+    <div class="prob-bar"><div id="prob3" class="prob-fill"></div></div>
+    <span id="prob3_text">25%</span>
+  </div>
+</div>
+
+<div class="panel log" id="log"></div>
 
 </div>
 
