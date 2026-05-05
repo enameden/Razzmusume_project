@@ -75,19 +75,42 @@ function sleep(ms){
   return new Promise(res=>setTimeout(res,ms));
 }
   
-async function playRoulette(options, duration=1000){
-  const log = document.getElementById("log");
+async function playRoulette(options, duration=1200){
 
-  let i = 0;
-  const interval = 50;
-  const loops = duration / interval;
+  const display = document.getElementById("rouletteDisplay");
 
-  for(let t=0; t<loops; t++){
-    const rand = options[Math.floor(Math.random()*options.length)];
-    log.innerHTML += `<div style="opacity:0.5">▶ ${rand}</div>`;
-    log.scrollTop = log.scrollHeight;
-    await sleep(interval + t*5);
+  let interval = 50;
+  let time = 0;
+  let current = "";
+
+  while(time < duration){
+
+    current = options[Math.floor(Math.random()*options.length)];
+    display.innerText = current;
+
+    await sleep(interval);
+
+    time += interval;
+
+    // 減速
+    interval += 5;
   }
+
+  // 最終結果
+  const result = options[Math.floor(Math.random()*options.length)];
+
+  display.innerText = result;
+
+  // 光らせる
+  display.style.color = "#6cf";
+  display.style.transform = "scale(1.2)";
+
+  setTimeout(()=>{
+    display.style.transform = "scale(1)";
+  },200);
+
+  return result;
+}
 
   const result = options[Math.floor(Math.random()*options.length)];
 
