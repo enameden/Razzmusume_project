@@ -49,6 +49,8 @@ function init(){
 
   updateRaceInfo();
 
+  document.getElementById("raceBtn").addEventListener("click", nextPhase);
+
   // ステータスバー初期化
   ["スピード","スタミナ","パワー","根性","賢さ"].forEach(syncBar);
 }
