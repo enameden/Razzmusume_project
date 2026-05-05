@@ -51,6 +51,8 @@ function init(){
 
   document.getElementById("raceBtn").addEventListener("click", nextPhase);
 
+}
+  
 // =====================
 // レース情報表示
 // =====================
@@ -61,6 +63,7 @@ const race = raceData.races[raceSelect.value];
   document.getElementById("playersDisplay").innerHTML = `
   👥 出走：${race.players}人
 `;
+}
 
 // =====================
 // 共通関数
@@ -105,21 +108,6 @@ async function playRoulette(options, duration=1200){
 
   // 最終結果（★ここ1回だけ）
   const result = options[Math.floor(Math.random()*options.length)];
-
-  window.syncBar = function(name){
-  const input = document.getElementById(name);
-  const bar = document.getElementById("bar_"+name);
-  const label = document.getElementById("val_"+name);
-
-  let val = parseInt(input.value);
-  if(isNaN(val) || val < 0) val = 0;
-
-  const max = 200;
-  const percent = Math.min(val, max) / max * 100;
-
-  bar.style.width = percent + "%";
-  label.innerText = val;
-}
 
   // 光る
   display.style.color = "#6cf";
@@ -286,6 +274,7 @@ if(phaseIndex >= 1 && phaseIndex <= 4){
 
   const probs = calculateProbabilities(currentStats, currentRace);
 updateProbUI(probs);
+}
 
   // 最終結果
   if(phaseIndex === 5){
