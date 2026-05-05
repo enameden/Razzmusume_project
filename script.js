@@ -161,7 +161,8 @@ async function nextPhase(){
   // 初回（初期化）
   if(phaseIndex === 0){
 
-    currentRace = raceData.races[raceSelect.value];
+const raceSelect = document.getElementById("raceSelect");
+currentRace = raceData.races[raceSelect.value];
 
     currentStats = {
       スピード:+スピード.value,
@@ -265,6 +266,8 @@ async function nextPhase(){
   }else{
     result.style.color = "#ccc";
   }
+
+}
     
 });
 
