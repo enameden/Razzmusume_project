@@ -230,12 +230,12 @@ const raceSelect = document.getElementById("raceSelect");
 currentRace = raceData.races[raceSelect.value];
 
     currentStats = {
-      スピード:+スピード.value,
-      スタミナ:+スタミナ.value,
-      パワー:+パワー.value,
-      根性:+根性.value,
-      賢さ:+賢さ.value
-    };
+  スピード: +document.getElementById("スピード").value,
+  スタミナ: +document.getElementById("スタミナ").value,
+  パワー: +document.getElementById("パワー").value,
+  根性: +document.getElementById("根性").value,
+  賢さ: +document.getElementById("賢さ").value
+};
 
     // やる気
     const mult = systemData.motivation[motivation.value];
@@ -290,7 +290,9 @@ updateProbUI(probs);
     points = points.map(p=>Math.max(0,p));
 
     const total = points.reduce((a,b)=>a+b,0);
-    const probs = points.map(p=>p/total);
+    const probs = total === 0
+  ? [0.25,0.25,0.25,0.25]
+  : points.map(p=>p/total);
 
     let r=Math.random();
     let stage=3;
@@ -344,7 +346,6 @@ updateProbUI(probs);
     result.style.color = "#ccc";
   }
 
-}
-    
+}    
 });
 
