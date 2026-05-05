@@ -78,6 +78,7 @@ function sleep(ms){
 async function playRoulette(options, duration=1200){
 
   const display = document.getElementById("rouletteDisplay");
+  const log = document.getElementById("log");
 
   let interval = 50;
   let time = 0;
@@ -91,17 +92,15 @@ async function playRoulette(options, duration=1200){
     await sleep(interval);
 
     time += interval;
-
-    // 減速
     interval += 5;
   }
 
-  // 最終結果
+  // 最終結果（★ここ1回だけ）
   const result = options[Math.floor(Math.random()*options.length)];
 
   display.innerText = result;
 
-  // 光らせる
+  // 光る
   display.style.color = "#6cf";
   display.style.transform = "scale(1.2)";
 
@@ -109,8 +108,7 @@ async function playRoulette(options, duration=1200){
     display.style.transform = "scale(1)";
   },200);
 
-  const result = options[Math.floor(Math.random()*options.length)];
-
+  // ログ
   log.innerHTML += `<div style="color:#6cf">★ ${result}</div>`;
   log.scrollTop = log.scrollHeight;
 
