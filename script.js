@@ -51,10 +51,6 @@ function init(){
 
   document.getElementById("raceBtn").addEventListener("click", nextPhase);
 
-  // ステータスバー初期化
-  ["スピード","スタミナ","パワー","根性","賢さ"].forEach(syncBar);
-}
-
 // =====================
 // レース情報表示
 // =====================
