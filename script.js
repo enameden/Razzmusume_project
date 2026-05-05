@@ -86,7 +86,7 @@ async function playRoulette(options, duration=1000){
     const rand = options[Math.floor(Math.random()*options.length)];
     log.innerHTML += `<div style="opacity:0.5">▶ ${rand}</div>`;
     log.scrollTop = log.scrollHeight;
-    await sleep(interval);
+    await sleep(interval + t*5);
   }
 
   const result = options[Math.floor(Math.random()*options.length)];
