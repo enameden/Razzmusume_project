@@ -59,6 +59,9 @@ function init(){
 function updateRaceInfo(){
   const raceSelect = document.getElementById("raceSelect");
 const race = raceData.races[raceSelect.value];
+
+    document.getElementById("playersDisplay").innerText =
+    `出走：${race.players}人`;
 }
 
 // =====================
