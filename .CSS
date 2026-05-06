@@ -5,13 +5,11 @@
 }
 
 .stat label {
-  width: 120px;     /* ← 固定幅にする */
-  text-align: left;
+  width: 120px;
 }
 
 .stat input {
-  width: 80px;
-  margin-left: auto;  /* ← これが超重要 */
+  margin-left: auto;
   text-align: right;
 }
 
