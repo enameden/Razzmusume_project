@@ -228,9 +228,9 @@ currentRace = raceData.races[raceSelect.value];
     currentStats = {
   スピード: +document.getElementById("スピード").value,
   スタミナ: +document.getElementById("スタミナ").value,
-  パワー　: +document.getElementById("パワー").value,
-  根性　　: +document.getElementById("根性").value,
-  賢さ　　: +document.getElementById("賢さ").value
+  パワー: +document.getElementById("パワー").value,
+  根性: +document.getElementById("根性").value,
+  賢さ: +document.getElementById("賢さ").value
 };
 
     // やる気
