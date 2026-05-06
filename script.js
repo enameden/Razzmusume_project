@@ -226,9 +226,9 @@ if(phaseIndex === 0){
   if(phaseIndex === 0){
 
 const raceSelect = document.getElementById("raceSelect");
-currentRace = raceData.races[raceSelect.value];
+const motivation = document.getElementById("motivation");
 
-    currentStats = {
+currentStats = {
   スピード: +document.getElementById("スピード").value,
   スタミナ: +document.getElementById("スタミナ").value,
   パワー: +document.getElementById("パワー").value,
