@@ -1,15 +1,12 @@
 .stat {
-  display: flex;
+  display: grid;
+  grid-template-columns: 120px 1fr;
   align-items: center;
   margin: 6px 0;
 }
 
-.stat label {
-  width: 120px;
-}
-
 .stat input {
-  margin-left: auto;
+  justify-self: end;
   text-align: right;
 }
 
@@ -63,4 +60,11 @@ button {
   height: 100%;
   width: 25%;
   background: linear-gradient(90deg, #6cf, #3af);
+}
+
+.result{
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.5s;
 }
