@@ -228,6 +228,8 @@ if(phaseIndex === 0){
 const raceSelect = document.getElementById("raceSelect");
 const motivation = document.getElementById("motivation");
 
+currentRace = raceData.races[raceSelect.value];
+
 currentStats = {
   スピード: +document.getElementById("スピード").value,
   スタミナ: +document.getElementById("スタミナ").value,
