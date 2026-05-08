@@ -349,8 +349,6 @@ updateProbUI(probs);
   }else{
     result.style.color = "#ccc";
   }
-
 }
-  
-});
 
+});
