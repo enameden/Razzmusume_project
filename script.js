@@ -312,12 +312,6 @@ updateProbUI(probs);
     const rank=Math.floor(Math.random()*(max-min+1))+min;
 
     showResult(rank);
-    function showResult(rank){
-
-  console.log(document.getElementById("result"));
-
-  const result = document.getElementById("result");
-  }
 
   phaseIndex++;
 
