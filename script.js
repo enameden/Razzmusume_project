@@ -350,6 +350,7 @@ updateProbUI(probs);
     result.style.color = "#ccc";
   }
 
-}    
+}
+  
 });
 
