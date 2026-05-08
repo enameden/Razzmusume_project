@@ -307,11 +307,15 @@ updateProbUI(probs);
     if(stage===0){min=1;max=1;}
     else if(stage===1){min=2;max=Math.floor(n*0.3);}
     else if(stage===2){min=Math.floor(n*0.3)+1;max=Math.floor(n*0.6);}
-    else{min=Math.floor(n*0.6)+1;max=n;}
+       else{
+      min=Math.floor(n*0.6)+1;
+      max=n;
+    }
 
-    const rank=Math.floor(Math.random()*(max-min+1))+min;
+    const rank = Math.floor(Math.random()*(max-min+1))+min;
 
     showResult(rank);
+  }
 
   phaseIndex++;
 
@@ -323,7 +327,11 @@ updateProbUI(probs);
     phaseIndex = 0;
   }
 }
-  function showResult(rank){
+
+// =====================
+// 結果表示
+// =====================
+function showResult(rank){
 
   const result = document.getElementById("result");
 
