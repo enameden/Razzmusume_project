@@ -68,3 +68,22 @@ button {
   text-align: center;
   transition: 0.5s;
 }
+
+.race-row{
+  margin-bottom:12px;
+}
+
+#bottomArea{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+
+#probBox{
+  width:40%;
+}
+
+#log{
+  width:60%;
+  height:250px;
+}
