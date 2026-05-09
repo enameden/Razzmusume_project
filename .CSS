@@ -76,7 +76,7 @@ button {
 #bottomArea{
   display:flex;
   gap:12px;
-  margin-top:10px;
+  align-items:flex-start;
 }
 
 #probBox{
@@ -86,4 +86,20 @@ button {
 #log{
   width:60%;
   height:250px;
+}
+
+.prob-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:8px 0;
+}
+
+.prob-bar{
+  flex:1;
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
 }
