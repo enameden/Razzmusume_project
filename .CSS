@@ -98,18 +98,22 @@ button:hover{
 ===================== */
 
 #bottomArea{
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
+  display:flex !important;
+  flex-direction:row !important;
+  width:100% !important;
+  gap:16px !important;
+  align-items:flex-start !important;
 }
 
 #probBox{
-  flex:4;
+  width:40% !important;
+  background:#223 !important;
 }
 
 #log{
-  flex:6;
-  min-height:260px;
+  width:60% !important;
+  background:#112 !important;
+  min-height:260px !important;
 }
 
 /* =====================
