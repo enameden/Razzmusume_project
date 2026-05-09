@@ -122,12 +122,14 @@ button:hover{
 }
 
 #probBox{
-  width:40%;
+  flex:4;
+  min-width:0;
 }
 
 #log{
-  width:60%;
-  min-height:250px;
+  flex:6;
+  min-width:0;
+  height:250px;
 }
 
 .prob-row{
