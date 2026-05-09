@@ -117,18 +117,17 @@ button:hover{
 
 #bottomArea{
   display:flex;
-  gap:16px;
+  flex-direction:row;
   align-items:flex-start;
+  gap:16px;
 }
 
 #probBox{
   flex:4;
-  min-width:0;
 }
 
 #log{
   flex:6;
-  min-width:0;
   height:250px;
 }
 
@@ -152,7 +151,6 @@ button:hover{
   width:25%;
   background:linear-gradient(90deg,#6cf,#39f);
 }
-
 .result{
   font-size:42px;
   font-weight:bold;
