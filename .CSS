@@ -75,16 +75,18 @@ button {
 
 #bottomArea{
   display:flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
   gap:12px;
   align-items:flex-start;
 }
 
 #probBox{
-  width:40%;
+  flex:4;
 }
 
 #log{
-  width:60%;
+  flex:6;
   height:250px;
 }
 
@@ -100,6 +102,6 @@ button {
 }
 
 .container {
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
 }
