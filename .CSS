@@ -116,18 +116,20 @@ button:hover{
 }
 
 #bottomArea{
-  display:flex;
-  flex-direction:row;
-  align-items:flex-start;
+  display:grid !important;
+  grid-template-columns:4fr 6fr !important;
   gap:16px;
+  align-items:start;
 }
 
 #probBox{
-  flex:4;
+  width:100% !important;
+  margin:0 !important;
 }
 
 #log{
-  flex:6;
+  width:100% !important;
+  margin:0 !important;
   height:250px;
 }
 
