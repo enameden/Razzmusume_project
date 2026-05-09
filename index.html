@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Razz娘・レースシミュレーター</title>
+<title>Razz娘レースシミュレーター</title>
 
 <style>
 body {
@@ -83,14 +83,20 @@ button:hover {
 
 <div class="container">
 
-<h1>Razz娘・レースシミュレーター</h1>
+<h1>
+  Razz娘<br>
+  レースシミュレーター
+</h1>
 
 <div class="panel">
-レース：
-<select id="raceSelect"></select>
+<div class="race-row">
+  レース：<br>
+  <select id="raceSelect"></select>
+</div>
 
-やる気：
-<select id="motivation">
+<div class="race-row">
+  やる気：<br>
+  <select id="motivation">
   <option>絶不調</option>
   <option>不調</option>
   <option selected>普通</option>
@@ -140,6 +146,8 @@ button:hover {
   <div id="rouletteDisplay">---</div>
 </div>
 
+<div id="bottomArea">
+  
 <div id="probBox" class="panel">
 
   <div class="prob-row">
@@ -174,7 +182,7 @@ button:hover {
 
 <div class="panel log" id="log"></div>
 
-  <div class="panel log" id="log"></div>
+   </div>
 
 <script src="script.js" defer></script>
 </body>
