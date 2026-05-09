@@ -321,13 +321,17 @@ updateProbUI(probs);
 
   phaseIndex++;
 
-  // ボタン更新
-  btn.innerText = phaseLabels[phaseIndex] || "終了";
+if(phaseIndex > 6){
+  phaseIndex = 0;
 
-  // 終了後リセット
-  if(phaseIndex > 5){
-    phaseIndex = 0;
-  }
+    document.getElementById("raceBtn").innerText =
+    phaseLabels[0];
+
+  return;
+}
+
+btn.innerText = phaseLabels[phaseIndex];
+  
 }
 
 // =====================
