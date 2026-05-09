@@ -98,6 +98,21 @@ button:hover{
   box-sizing:border-box;
 }
 
+#bottomArea{
+  display:flex;
+  flex-direction:row;
+  gap:12px;
+  align-items:flex-start;
+}
+
+#probBox{
+  flex:4;
+}
+
+#log{
+  flex:6;
+}
+
 .prob-row{
   display:flex;
   align-items:center;
