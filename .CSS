@@ -120,7 +120,7 @@ button:hover{
 }
 
 .log{
-  widtn:120px
+  width:120px;
   overflow:auto;
   text-align:left;
   background:#111;
