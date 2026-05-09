@@ -78,18 +78,24 @@ button:hover{
 
 #bottomArea{
   display:flex;
-  flex-direction:row;
   gap:12px;
   align-items:flex-start;
 }
 
 #probBox{
   flex:4;
+  min-width:0;
 }
 
 #log{
   flex:6;
+  min-width:0;
   height:250px;
+}
+
+#probBox.panel,
+#log.panel{
+  box-sizing:border-box;
 }
 
 .prob-row{
