@@ -348,8 +348,7 @@ for(let i=0;i<mobCount;i++){
     1
   );
 }
-    applyComparison(currentStats,mob,systemData.thresholds,points,0.5);
-
+  
     points = points.map(p=>Math.max(0,p));
 
     const total = points.reduce((a,b)=>a+b,0);
