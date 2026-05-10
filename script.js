@@ -418,10 +418,31 @@ for(let i=0;i<mobCount;i++){
   phaseIndex++;
 
 if(phaseIndex > 6){
+
   phaseIndex = 0;
 
-    document.getElementById("raceBtn").innerText =
+  document.getElementById("raceBtn").innerText =
     phaseLabels[0];
+
+  // ルーレット初期化
+  document.getElementById("rouletteDisplay").innerText =
+    "---";
+
+  // 結果初期化
+  document.getElementById("result").innerText = "";
+
+  // ログ初期化
+  document.getElementById("log").innerHTML = "";
+
+  // 確率初期化
+  for(let i=0;i<4;i++){
+
+    document.getElementById("prob"+i).style.width =
+      "25%";
+
+    document.getElementById("prob"+i+"_text").innerText =
+      "25%";
+  }
 
   return;
 }
