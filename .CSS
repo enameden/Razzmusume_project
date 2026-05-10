@@ -13,7 +13,6 @@ body{
 .panel{
   background:#1a2233;
   padding:15px;
-  margin:10px 0;
   border-radius:10px;
   box-shadow:0 0 10px #000;
 }
@@ -116,28 +115,29 @@ button:hover{
 }
 
 #bottomArea{
-  display:grid !important;
-  grid-template-columns:4fr 6fr !important;
+  display:grid;
+  grid-template-columns:4fr 6fr;
   gap:16px;
-  align-items:start;
+  margin-top:16px;
 }
 
 #probBox{
-  width:100% !important;
-  margin:0 !important;
+  width:100%;
 }
 
 #log{
-  width:100% !important;
-  margin:0 !important;
+  width:100%;
   height:250px;
+  overflow:auto;
+  text-align:left;
+  background:#111;
 }
 
 .prob-row{
   display:flex;
   align-items:center;
   gap:8px;
-  margin:10px 0;
+  margin:8px 0;
 }
 
 .prob-bar{
@@ -151,10 +151,11 @@ button:hover{
 .prob-fill{
   height:100%;
   width:25%;
-  background:linear-gradient(90deg,#6cf,#39f);
+  background:#6cf;
 }
+
 .result{
   font-size:42px;
   font-weight:bold;
-  text-align:center;
+  margin-top:20px;
 }
