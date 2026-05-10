@@ -154,12 +154,19 @@ function generateMob(reference,min,max){
 }
 
 function applyComparison(player,target,thresholds,points,weight){
+
   for(let key in player){
-    const diff = player[key] - target[key];
+
+    const ratio = player[key] / target[key];
 
     for(let t of thresholds){
-      if(diff >= t.diff){
-        t.effects.forEach((e,i)=>points[i]+=e*weight);
+
+      if(ratio >= t.ratio){
+
+        t.effects.forEach((e,i)=>{
+          points[i] += e * weight;
+        });
+
         break;
       }
     }
@@ -168,7 +175,7 @@ function applyComparison(player,target,thresholds,points,weight){
 
 function calculateProbabilities(stats, race){
 
-  let points=[25,25,25,25];
+  let points=[100,100,100,100];
 
   applyComparison(stats, race.reference, systemData.thresholds, points, 1);
   applyComparison(stats, rivalStats, systemData.thresholds, points, 1);
@@ -311,7 +318,7 @@ updateProbUI(probs);
   // 最終結果
   if(phaseIndex === 5){
 
-    let points=[25,25,25,25];
+    let points=[100,100,100,100];
 
     applyComparison(currentStats,currentRace.reference,systemData.thresholds,points,1);
     applyComparison(currentStats,rivalStats,systemData.thresholds,points,1);
