@@ -304,7 +304,7 @@ for(let k in rivalStats){
 
     // やる気
     const mult = systemData.motivation[motivation.value];
-    for(let k in currentStats) currentStats[k]*=mult;
+    for(let k in currentStats) currentStats[k] = Math.floor(currentStats[k] * mult);
 
     addLog("レース準備完了！");
     addLog(`出走人数：${currentRace.players}人`);
