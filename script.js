@@ -13,6 +13,7 @@ let systemData, raceData;
   let phaseIndex = 0;
 let currentStats = {};
 let currentRace = null;
+  let rivalStats = {};
 
 // =====================
 // 初期ロード
@@ -47,8 +48,9 @@ function init(){
 
   raceEl.addEventListener("change", updateRaceInfo);
 
-  updateRaceInfo();
-
+  function updateRaceInfo(){
+  // 何もしない
+}
   document.getElementById("raceBtn").addEventListener("click", nextPhase);
 
 }
@@ -169,7 +171,7 @@ function calculateProbabilities(stats, race){
   let points=[25,25,25,25];
 
   applyComparison(stats, race.reference, systemData.thresholds, points, 1);
-  applyComparison(stats, race.rival, systemData.thresholds, points, 1);
+  applyComparison(stats, rivalStats, systemData.thresholds, points, 1);
 
   const mob = generateMob(race.reference, race.mobMin, race.mobMax);
   applyComparison(stats, mob, systemData.thresholds, points, 0.5);
@@ -213,11 +215,15 @@ if(phaseIndex === 0){
 
   currentRace = raceData.races[document.getElementById("raceSelect").value];
 
-  await typeLog("ライバルステータス：");
+  rivalStats = {};
 
-  for(let k in currentRace.rival){
-    await typeLog(`${k}：${currentRace.rival[k]}`);
-  }
+for(let k in currentRace.rival){
+
+  const rand = 0.95 + Math.random()*0.10;
+
+  rivalStats[k] = Math.floor(
+    currentRace.rival[k] * rand
+  );
 }
   
   const btn = document.getElementById("raceBtn");
@@ -238,17 +244,41 @@ currentStats = {
   賢さ: +document.getElementById("賢さ").value
 };
 
+    const motivationKeys = Object.keys(systemData.motivation);
+
+const rivalMood =
+  motivationKeys[
+    Math.floor(Math.random()*motivationKeys.length)
+  ];
+
+const rivalMult =
+  systemData.motivation[rivalMood];
+
+for(let k in rivalStats){
+  rivalStats[k] *= rivalMult;
+  rivalStats[k] = Math.floor(rivalStats[k]);
+}
+
+await typeLog(`ライバルやる気：${rivalMood}`);
+await typeLog("ライバルステータス：");
+
+for(let k in rivalStats){
+  await typeLog(`${k}：${rivalStats[k]}`);
+}
+
     // やる気
     const mult = systemData.motivation[motivation.value];
     for(let k in currentStats) currentStats[k]*=mult;
 
     addLog("レース準備完了！");
+    addLog(`出走人数：${currentRace.players}人`);
   }
 
   // 天候
   if(phaseIndex === 0){
     const w = weightedRandom(systemData.weather);
     applyEffects(currentStats, w.effects);
+    applyEffects(rivalStats, w.effects);
     await typeLog("天候：" + w.name);
   }
 
@@ -270,6 +300,7 @@ if(phaseIndex >= 1 && phaseIndex <= 4){
   }
 
   applyEffects(currentStats, ev.effects);
+  applyEffects(rivalStats, ev.effects);
 
   addLog(`${phase.name}：${ev.name}`);
 
@@ -283,7 +314,7 @@ updateProbUI(probs);
     let points=[25,25,25,25];
 
     applyComparison(currentStats,currentRace.reference,systemData.thresholds,points,1);
-    applyComparison(currentStats,currentRace.rival,systemData.thresholds,points,1);
+    applyComparison(currentStats,rivalStats,systemData.thresholds,points,1);
 
     const mob = generateMob(currentRace.reference,currentRace.mobMin,currentRace.mobMax);
     applyComparison(currentStats,mob,systemData.thresholds,points,0.5);
