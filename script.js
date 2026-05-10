@@ -48,8 +48,6 @@ function init(){
 
   raceEl.addEventListener("change", updateRaceInfo);
 
-  function updateRaceInfo(){
-  // 何もしない
 }
   document.getElementById("raceBtn").addEventListener("click", nextPhase);
 
