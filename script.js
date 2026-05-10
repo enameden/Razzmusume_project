@@ -316,7 +316,31 @@ updateProbUI(probs);
     applyComparison(currentStats,currentRace.reference,systemData.thresholds,points,1);
     applyComparison(currentStats,rivalStats,systemData.thresholds,points,1);
 
-    const mob = generateMob(currentRace.reference,currentRace.mobMin,currentRace.mobMax);
+    // =====================
+// モブ3人抽選
+// =====================
+
+const mobCount = Math.min(
+  3,
+  currentRace.players - 2
+);
+
+for(let i=0;i<mobCount;i++){
+
+  const mob = generateMob(
+    currentRace.reference,
+    currentRace.mobMin,
+    currentRace.mobMax
+  );
+
+  applyComparison(
+    currentStats,
+    mob,
+    systemData.mobThresholds,
+    points,
+    1
+  );
+}
     applyComparison(currentStats,mob,systemData.thresholds,points,0.5);
 
     points = points.map(p=>Math.max(0,p));
