@@ -177,8 +177,13 @@ function calculateProbabilities(stats, race){
 
   let points=[100,100,100,100];
 
-  applyComparison(stats, race.reference, systemData.thresholds, points, 1);
-  applyComparison(stats, rivalStats, systemData.thresholds, points, 1);
+  applyComparison(
+  stats,
+  rivalStats,
+  systemData.rivalThresholds,
+  points,
+  1
+);
 
   const mob = generateMob(race.reference, race.mobMin, race.mobMax);
   applyComparison(stats, mob, systemData.thresholds, points, 0.5);
