@@ -232,6 +232,8 @@ for(let k in currentRace.rival){
     currentRace.rival[k] * rand
   );
 }
+
+}
   
   const btn = document.getElementById("raceBtn");
 
