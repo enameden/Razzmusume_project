@@ -117,21 +117,20 @@ button:hover{
 }
 
 #bottomArea{
-  display:flex;
-  flex-direction:row;
+  display:flex !important;
+  flex-direction:row !important;
   gap:16px;
   align-items:flex-start;
 }
 
 #probBox{
-  width:40%;
-  min-width:0;
+  width:40% !important;
 }
 
 #log{
-  width:60%;
-  min-width:0;
+  width:60% !important;
 }
+
 .prob-row{
   display:flex;
   align-items:center;
