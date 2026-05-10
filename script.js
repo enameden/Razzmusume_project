@@ -50,7 +50,6 @@ function init(){
 
   updateRaceInfo();
 
-}
   document.getElementById("raceBtn").addEventListener("click", nextPhase);
 
 }
