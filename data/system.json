@@ -54,7 +54,7 @@
     "ratio":0.8,
     "effects":[-4,-3,3,5]
   }
-]
+],
   
   "weather": [
     { "name": "晴れ", "weight": 50, "effects": {} },
