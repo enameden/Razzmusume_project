@@ -177,21 +177,45 @@ function calculateProbabilities(stats, race){
 
   let points=[100,100,100,100];
 
+  // ライバル比較
   applyComparison(
-  stats,
-  rivalStats,
-  systemData.rivalThresholds,
-  points,
-  1
-);
+    stats,
+    rivalStats,
+    systemData.rivalThresholds,
+    points,
+    1
+  );
 
-  const mob = generateMob(race.reference, race.mobMin, race.mobMax);
-  applyComparison(stats, mob, systemData.thresholds, points, 0.5);
+  // モブ比較
+  const mobCount = Math.min(
+    3,
+    race.players - 2
+  );
+
+  for(let i=0;i<mobCount;i++){
+
+    const mob = generateMob(
+      race.reference,
+      race.mobMin,
+      race.mobMax
+    );
+
+    applyComparison(
+      stats,
+      mob,
+      systemData.mobThresholds,
+      points,
+      1
+    );
+  }
 
   points = points.map(p=>Math.max(0,p));
 
   const total = points.reduce((a,b)=>a+b,0);
-  if(total === 0) return [0.25,0.25,0.25,0.25];
+
+  if(total === 0){
+    return [0.25,0.25,0.25,0.25];
+  }
 
   return points.map(p=>p/total);
 }
