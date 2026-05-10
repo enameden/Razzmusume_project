@@ -1,3 +1,7 @@
+*{
+  box-sizing:border-box;
+}
+
 body{
   background:#0b0f1a;
   color:#fff;
@@ -113,21 +117,21 @@ button:hover{
 }
 
 #bottomArea{
-  display:grid;
-  grid-template-columns:4fr 6fr;
+  display:flex;
+  flex-direction:row;
   gap:16px;
-  align-items:start;
+  align-items:flex-start;
 }
 
 #probBox{
-  width:100%;
+  width:40%;
+  min-width:0;
 }
 
 #log{
-  width:100%;
-  height:250px;
+  width:60%;
+  min-width:0;
 }
-
 .prob-row{
   display:flex;
   align-items:center;
