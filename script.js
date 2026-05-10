@@ -357,15 +357,6 @@ updateProbUI(probs);
   points,
   1
 );
-applyComparison(
-  currentStats,
-  mob,
-  systemData.mobThresholds,
-  points,
-  1
-);
-    
-    applyComparison(currentStats,rivalStats,systemData.rivalThresholds,points,1);
 
     // =====================
 // モブ3人抽選
