@@ -49,8 +49,8 @@ button:hover{
 
 .stat input{
   justify-self:end;
-  text-align:right;
   width:100px;
+  text-align:right;
 }
 
 #rouletteBox{
@@ -70,9 +70,7 @@ button:hover{
 #rouletteDisplay{
   font-size:28px;
   font-weight:bold;
-  margin-top:5px;
   color:#fff;
-  text-shadow:0 0 10px #6cf;
 }
 
 /* =====================
@@ -118,7 +116,7 @@ button:hover{
   display:grid;
   grid-template-columns:4fr 6fr;
   gap:16px;
-  margin-top:16px;
+  align-items:start;
 }
 
 #probBox{
@@ -128,16 +126,13 @@ button:hover{
 #log{
   width:100%;
   height:250px;
-  overflow:auto;
-  text-align:left;
-  background:#111;
 }
 
 .prob-row{
   display:flex;
   align-items:center;
   gap:8px;
-  margin:8px 0;
+  margin:10px 0;
 }
 
 .prob-bar{
@@ -151,7 +146,7 @@ button:hover{
 .prob-fill{
   height:100%;
   width:25%;
-  background:#6cf;
+  background:linear-gradient(90deg,#6cf,#39f);
 }
 
 .result{
