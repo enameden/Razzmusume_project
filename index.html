@@ -66,7 +66,84 @@ button:hover {
   color:gold;
   text-shadow:0 0 10px gold;
 }
+.stat{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  align-items:center;
+  margin:6px 0;
+}
 
+.stat input{
+  width:100px;
+  justify-self:end;
+  text-align:right;
+}
+
+#rouletteBox{
+  margin:10px 0;
+  padding:15px;
+  background:#111;
+  border:2px solid #6cf;
+  border-radius:10px;
+  box-shadow:0 0 10px #6cf;
+}
+
+#rouletteLabel{
+  font-size:14px;
+  color:#aaa;
+}
+
+#rouletteDisplay{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:5px;
+  color:#fff;
+  text-shadow:0 0 10px #6cf;
+}
+
+#bottomArea{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  width:100%;
+}
+
+#probBox{
+  width:40%;
+}
+
+#log{
+  width:60%;
+  height:250px;
+}
+
+.prob-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+}
+
+.prob-bar{
+  flex:1;
+  height:12px;
+  background:#333;
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.prob-fill{
+  height:100%;
+  width:25%;
+  background:linear-gradient(90deg,#6cf,#39f);
+}
+
+.result{
+  font-size:42px;
+  font-weight:bold;
+  margin-top:20px;
+}
+  
 </style>
 </head>
 
@@ -139,10 +216,6 @@ button:hover {
   <div id="rouletteDisplay">---</div>
 </div>
 
-  <div style="display:flex;">
-  <div style="width:40%;background:red;">左</div>
-  <div style="width:60%;background:blue;">右</div>
-</div>
   
 <!-- 横並びエリア -->
 <div id="bottomArea">
