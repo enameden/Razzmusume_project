@@ -173,8 +173,6 @@ function applyComparison(player,target,thresholds,points,weight){
   }
 }
 
-  });
-
 function calculateProbabilities(stats, race){
 
   let points=[100,100,100,100];
