@@ -323,7 +323,7 @@ updateProbUI(probs);
     let points=[100,100,100,100];
 
     applyComparison(currentStats,currentRace.reference,systemData.thresholds,points,1);
-    applyComparison(currentStats,rivalStats,systemData.thresholds,points,1);
+    applyComparison(currentStats,rivalStats,systemData.rivalThresholds,points,1);
 
     // =====================
 // モブ3人抽選
